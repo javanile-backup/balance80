@@ -9,7 +9,7 @@
 
 var fs = require("fs");
 var path = require("path");
-var local = "node_modules/balance80/src/balance80.js";
+var local = process.cwd() + "/node_modules/balance80/src/balance80.js";
 var argv = process.argv.slice(2);
 var cli = null;
 
