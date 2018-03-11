@@ -1,6 +1,6 @@
 {
     "name": "balance80",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "author": {
         "name": "Francesco Bianco",
         "email": "bianco@javanile.org"
@@ -10,7 +10,7 @@
         "url": "https://github.com/javanile/balance80.git"
     },
     "bin": {
-        "chessfix": "./bin/balance80"
+        "balance80": "./bin/balance80"
     },
     "dependencies": {
         "body-parser": "^1.17.2",
