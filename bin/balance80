@@ -1,0 +1,24 @@
+#!/usr/bin/env node
+/*!
+ * Balance80: v0.0.1
+ * Copyright(c) 2016-2018 Javanile.org
+ * MIT Licensed
+ */
+
+"use strict";
+
+var fs = require("fs");
+var path = require("path");
+var local = "node_modules/balance80/src/balance80.js";
+var argv = process.argv.slice(2);
+var cli = null;
+
+if (!fs.existsSync(local)) {
+    cli = require("../src/balance80");
+} else {
+    cli = require(local);
+}
+
+cli.run(argv, function (debug) {
+    //console.log(debug);
+});

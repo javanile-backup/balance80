@@ -1,0 +1,33 @@
+{
+    "name": "balance80",
+    "version": "0.0.1",
+    "author": {
+        "name": "Francesco Bianco",
+        "email": "bianco@javanile.org"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/javanile/balance80.git"
+    },
+    "bin": {
+        "chessfix": "./bin/balance80"
+    },
+    "dependencies": {
+        "body-parser": "^1.17.2",
+        "express": "^4.15.3",
+        "nodemon": "^1.14.3",
+        "open": "0.0.5",
+        "yamljs": "^0.3.0"
+    },
+    "devDependencies": {
+        "gulp": "^3.9.1",
+        "gulp-angular-templatecache": "^2.0.0",
+        "gulp-concat": "^2.6.1",
+        "gulp-concat-css": "^2.3.0",
+        "gulp-modify-css-urls": "^0.2.2",
+        "gulp-rename": "^1.2.2",
+        "gulp-sass": "^3.1.0",
+        "gulp-watch": "^4.3.11",
+        "run-sequence": "^1.2.2"
+    }
+}
