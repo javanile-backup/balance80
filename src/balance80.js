@@ -23,10 +23,13 @@ module.exports = {
 
         for (var host in config.services) {
             var node = join(configPath, config.services[host].node);
-            var port = config.services[host].port
+            var port = config.services[host].port;
+            var temp = process.env.PORT;
+            process.env.PORT = port;
             console.log('Start:', host, node);
-            tables[host] =
+            tables[host] = port;
             require(node);
+            process.env.PORT = temp;
         }
 
         var server = bouncy(function (req, res, bounce) {
@@ -39,8 +42,6 @@ module.exports = {
         });
 
         server.listen(80);
-
-        console.log('Server running at http://127.0.0.1:1337/');
     }
 
 };
