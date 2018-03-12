@@ -1,13 +1,46 @@
 
+var fs = require("fs"),
+    realpath = require("fs").realpathSync,
+    dirname = require("path").dirname,
+    basename = require("path").basename,
+    join = require("path").join,
+    yaml = require("js-yaml"),
+    bouncy = require('bouncy'),
+    EOL = require('os').EOL;
 
 
-var http = require('http');
+module.exports = {
 
-var server = http.createServer(function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/plain'});
-    res.end('Hello Worldn');
-})
 
-server.listen(80, '127.0.0.1');
+    run: function (args) {
 
-console.log('Server running at http://127.0.0.1:1337/');
+        var configFile = args[0];
+        var configPath = dirname(realpath(configFile));
+        var config = yaml.safeLoad(fs.readFileSync(configFile).toString());
+        var tables = {};
+
+        console.log(config);
+
+        for (var host in config.services) {
+            var node = join(configPath, config.services[host].node);
+            var port = config.services[host].port
+            console.log('Start:', host, node);
+            tables[host] =
+            require(node);
+        }
+
+        var server = bouncy(function (req, res, bounce) {
+            if (tables[req.headers.host]) {
+                bounce(tables[req.headers.host]);
+            } else {
+                res.statusCode = 404;
+                res.end('Host: ' + req.headers.host);
+            }
+        });
+
+        server.listen(80);
+
+        console.log('Server running at http://127.0.0.1:1337/');
+    }
+
+};
