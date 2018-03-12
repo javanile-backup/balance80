@@ -1,25 +1,29 @@
+/*!
+ * Balance80: v0.1.7
+ * Copyright(c) 2016-2017 Javanile.org
+ * MIT Licensed
+ */
 
-var fs = require("fs"),
-    realpath = require("fs").realpathSync,
-    dirname = require("path").dirname,
-    basename = require("path").basename,
-    join = require("path").join,
-    yaml = require("js-yaml"),
-    bouncy = require('bouncy'),
-    EOL = require('os').EOL;
-
+const fs = require("fs"),
+      realpath = require("fs").realpathSync,
+      dirname = require("path").dirname,
+      basename = require("path").basename,
+      join = require("path").join,
+      yaml = require("js-yaml"),
+      bouncy = require('bouncy');
 
 module.exports = {
 
-
-    run: function (args) {
-
+    /**
+     *
+     * @param args
+     * @param callback
+     */
+    run: function (args, callback) {
         var configFile = args[0];
         var configPath = dirname(realpath(configFile));
         var config = yaml.safeLoad(fs.readFileSync(configFile).toString());
         var tables = {};
-
-        console.log(config);
 
         for (var host in config.services) {
             var node = join(configPath, config.services[host].node);
@@ -43,5 +47,4 @@ module.exports = {
 
         server.listen(80);
     }
-
 };
